@@ -72,31 +72,43 @@ document.addEventListener('DOMContentLoaded', function() {
         const fromValue = parseInt(fromInput.value);
         const toValue = parseInt(toInput.value);
         
-        // Spin animation
+        // Stop any previous animations
         digits.forEach(digit => {
-            digit.parentElement.classList.add('spinning');
+            digit.parentElement.classList.remove('spinning');
+            digit.classList.remove('winner');
         });
         
-        // Generate random number after delay
-        setTimeout(() => {
-            const randomNum = getRandomNumber(fromValue, toValue);
-            displayNumber(randomNum);
+        // Generate random number
+        const randomNum = getRandomNumber(fromValue, toValue);
+        const paddedNumber = randomNum.toString().padStart(4, '0');
+        
+        // Sequentially spin each digit
+        digits.forEach((digit, index) => {
+            // Clear any previous content
+            digit.textContent = '0';
             
-            // Stop spinning
-            digits.forEach(digit => {
-                digit.parentElement.classList.remove('spinning');
-            });
-            
-            // Add winner animation
-            digits.forEach(digit => {
-                digit.classList.add('winner');
+            // Add spinning with a delay for each digit
+            setTimeout(() => {
+                digit.parentElement.classList.add('spinning');
+                
+                // Stop spinning and show the final digit after a delay
                 setTimeout(() => {
-                    digit.classList.remove('winner');
-                }, 500);
-            });
-            
-            spinButton.classList.remove('spinning');
-        }, 2000);
+                    digit.parentElement.classList.remove('spinning');
+                    digit.textContent = paddedNumber[index];
+                    
+                    // Add winner animation
+                    digit.classList.add('winner');
+                    setTimeout(() => {
+                        digit.classList.remove('winner');
+                        
+                        // Remove spinning from button after last digit is done
+                        if (index === 3) {
+                            spinButton.classList.remove('spinning');
+                        }
+                    }, 200);
+                }, 4500);
+            }, index * 2500); // Stagger start of each digit's animation
+        });
     });
 
     // Get random number within range
