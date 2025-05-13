@@ -64,53 +64,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Spin button click handler
     spinButton.addEventListener('click', function() {
-        if (spinButton.classList.contains('spinning')) return;
-        
-        spinButton.classList.add('spinning');
-        validateInputs();
-        
-        const fromValue = parseInt(fromInput.value);
-        const toValue = parseInt(toInput.value);
-        
-        // Stop any previous animations
-        digits.forEach(digit => {
-            digit.parentElement.classList.remove('spinning');
-            digit.classList.remove('winner');
-        });
-        
-        // Generate random number
-        const randomNum = getRandomNumber(fromValue, toValue);
-        const paddedNumber = randomNum.toString().padStart(4, '0');
-        
-        // Sequentially spin each digit
-        digits.forEach((digit, index) => {
-            // Clear any previous content
-            digit.textContent = '0';
-            
-            // Add spinning with a delay for each digit
-            setTimeout(() => {
-                digit.parentElement.classList.add('spinning');
-                
-                // Stop spinning and show the final digit after a delay
-                setTimeout(() => {
-                    digit.parentElement.classList.remove('spinning');
-                    digit.textContent = paddedNumber[index];
-                    
-                    // Add winner animation
-                    digit.classList.add('winner');
-                    setTimeout(() => {
-                        digit.classList.remove('winner');
-                        
-                        // Remove spinning from button after last digit is done
-                        if (index === 3) {
-                            spinButton.classList.remove('spinning');
-                        }
-                    }, 200);
-                }, 4500);
-            }, index * 2500); // Stagger start of each digit's animation
-        });
-    });
+		if (spinButton.classList.contains('spinning')) return;
 
+		spinButton.classList.add('spinning');
+		validateInputs();
+
+		const fromValue = parseInt(fromInput.value);
+		const toValue = parseInt(toInput.value);
+
+		// Dừng animation cũ
+		digits.forEach(digit => {
+			digit.parentElement.classList.remove('spinning');
+			digit.classList.remove('winner');
+			digit.textContent = '0';
+		});
+
+		const randomNum = getRandomNumber(fromValue, toValue);
+		const paddedNumber = randomNum.toString().padStart(4, '0');
+
+		// TẤT CẢ bắt đầu quay ngay lập tức
+		digits.forEach((digit) => {
+			digit.parentElement.classList.add('spinning');
+		});
+
+		// Dừng quay lần lượt từng digit
+		digits.forEach((digit, index) => {
+			const stopDelay = 6000 + index * 2000; // bắt đầu dừng từ 5s, mỗi thẻ cách 2s
+
+			setTimeout(() => {
+				digit.parentElement.classList.remove('spinning');
+				digit.textContent = paddedNumber[index];
+
+				digit.classList.add('winner');
+				setTimeout(() => digit.classList.remove('winner'), 200);
+
+				if (index === digits.length - 1) {
+					spinButton.classList.remove('spinning');
+				}
+			}, stopDelay);
+		});
+	});
+	
     // Get random number within range
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
