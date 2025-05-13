@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISA - Lucky Draw | Quay Số Trúng Thưởng</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./static/img/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./static/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="./static/css/animations.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="lantern lantern-1">
+            <img src="./static/svg/lantern.svg" alt="Decorative lantern">
+        </div>
+        <div class="lantern lantern-2">
+            <img src="./static/svg/lantern.svg" alt="Decorative lantern">
+        </div>
+        <div class="fan fan-1">
+            <img src="./static/svg/fan.svg" alt="Decorative fan">
+        </div>
+        <div class="fan fan-2">
+            <img src="./static/svg/fan.svg" alt="Decorative fan">
+        </div>
+        <div class="pattern pattern-1">
+            <img src="./static/svg/pattern.svg" alt="Decorative pattern">
+        </div>
+        <div class="pattern pattern-2">
+            <img src="./static/svg/pattern.svg" alt="Decorative pattern">
+        </div>
+    </div>
+
+    <div class="container main-container">
+        <div class="language-toggle d-none">
+            <button class="btn lang-btn active" id="vi-btn">VI</button>
+            <button class="btn lang-btn" id="en-btn">EN</button>
+        </div>
+
+        <h1 class="title" id="title-vi">QUAY SỐ <br> TRÚNG THƯỞNG</h1>
+        <h1 class="title d-none" id="title-en">LUCKY DRAW</h1>
+
+        <div class="digits-container">
+            <div class="digit-box">
+                <span class="digit">0</span>
+            </div>
+            <div class="digit-box">
+                <span class="digit">0</span>
+            </div>
+            <div class="digit-box">
+                <span class="digit">0</span>
+            </div>
+            <div class="digit-box">
+                <span class="digit">0</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="input-group mb-3">
+                <label for="from-input" class="input-group-text">From:</label>
+                <input type="number" class="form-control" id="from-input" value="1" min="1" max="9999">
+            </div>
+            <div class="input-group mb-3">
+                <label for="to-input" class="input-group-text">To:</label>
+                <input type="number" class="form-control" id="to-input" value="9999" min="1" max="9999">
+            </div>
+        </div>
+
+        <button id="spin-btn" class="spin-button">
+            <span>QUAY</span>
+        </button>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="./static/js/script.js"></script>
+</body>
+</html>

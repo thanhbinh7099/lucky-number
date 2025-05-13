@@ -1,0 +1,125 @@
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(15deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+@keyframes spinner {
+    0% {
+        content: "0";
+    }
+    10% {
+        content: "1";
+    }
+    20% {
+        content: "2";
+    }
+    30% {
+        content: "3";
+    }
+    40% {
+        content: "4";
+    }
+    50% {
+        content: "5";
+    }
+    60% {
+        content: "6";
+    }
+    70% {
+        content: "7";
+    }
+    80% {
+        content: "8";
+    }
+    90% {
+        content: "9";
+    }
+    100% {
+        content: "0";
+    }
+}
+
+.spinning {
+    position: relative;
+}
+
+.spinning::before {
+    content: attr(data-digit);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spinner 0.1s linear infinite;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--digit-orange);
+    font-family: 'Roboto', sans-serif;
+}
+
+.winner {
+    animation: winner 0.5s ease-in-out;
+}
+
+@keyframes winner {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        color: var(--gold);
+    }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.spin-button.spinning {
+    animation: buttonSpin 2s ease-in-out;
+}
+
+@keyframes buttonSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 576px) {
+    .spinning::before {
+        font-size: 2.5rem;
+    }
+}
